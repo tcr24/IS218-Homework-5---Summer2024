@@ -1,8 +1,9 @@
 import sys
 import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../HomeworkFive')))
 
-from HomeworkFive.command import AddCommand, SubtractCommand, MultiplyCommand, DivideCommand
+from command import AddCommand, SubtractCommand, MultiplyCommand, DivideCommand
+
 
 def test_add_command():
     add = AddCommand()

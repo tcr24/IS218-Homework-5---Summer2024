@@ -1,21 +1,18 @@
 import logging
-
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
-
 import os
 from dotenv import load_dotenv
+
+from HomeworkFive.command import AddCommand, SubtractCommand, MultiplyCommand, DivideCommand  # Absolute import
+from plugin_loader import PluginLoader
 
 load_dotenv()
 
 ENVIRONMENT = os.getenv('ENVIRONMENT')
 
-logger.info(f"Running in {ENVIRONMENT} environment")
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
-import sys
-from command import AddCommand, SubtractCommand, MultiplyCommand, DivideCommand  # Absolute import
-from plugin_loader import PluginLoader
+logger.info(f"Running in {ENVIRONMENT} environment")
 
 def main():
     loader = PluginLoader()
