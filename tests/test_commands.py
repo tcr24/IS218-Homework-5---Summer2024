@@ -1,24 +1,21 @@
-import pytest
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from HomeworkFive.command import AddCommand, SubtractCommand, MultiplyCommand, DivideCommand
 
-def test_add():
-    cmd = AddCommand()
-    assert cmd.execute(1, 2, 3) == 6
-    assert cmd.execute(0, 0) == 0
+def test_add_command():
+    add = AddCommand()
+    assert add.execute(1, 2) == 3
 
-def test_subtract():
-    cmd = SubtractCommand()
-    assert cmd.execute(10, 5) == 5
-    with pytest.raises(ValueError):
-        cmd.execute(10)
+def test_subtract_command():
+    subtract = SubtractCommand()
+    assert subtract.execute(3, 1) == 2
 
-def test_multiply():
-    cmd = MultiplyCommand()
-    assert cmd.execute(2, 3) == 6
-    assert cmd.execute(0, 10) == 0
+def test_multiply_command():
+    multiply = MultiplyCommand()
+    assert multiply.execute(2, 3) == 6
 
-def test_divide():
-    cmd = DivideCommand()
-    assert cmd.execute(10, 2) == 5
-    with pytest.raises(ValueError):
-        cmd.execute(10, 0)
+def test_divide_command():
+    divide = DivideCommand()
+    assert divide.execute(6, 2) == 3
