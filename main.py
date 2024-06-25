@@ -1,3 +1,18 @@
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+ENVIRONMENT = os.getenv('ENVIRONMENT')
+
+logger.info(f"Running in {ENVIRONMENT} environment")
+
 import sys
 from command import AddCommand, SubtractCommand, MultiplyCommand, DivideCommand  # Absolute import
 from plugin_loader import PluginLoader
@@ -9,7 +24,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 class Calculator:
     def __init__(self, plugins_dir='plugins'):
@@ -31,12 +45,12 @@ class Calculator:
         self.commands.update(plugins)
 
     def show_menu(self):
-        print("Available commands:")
+        logger.info("Available commands:")
         for command in self.commands:
-            print(f"- {command}")
+            logger.info(f"- {command}")
 
     def exit(self):
-        print("Exiting calculator. Goodbye!")
+        logger.info("Exiting calculator. Goodbye!")
         sys.exit(0)
 
     def run(self):
@@ -54,11 +68,11 @@ class Calculator:
                         command()
                     else:
                         result = command.execute(*args)
-                        print(f"Result: {result}")
+                        logger.info(f"Result: {result}")
                 except Exception as e:
-                    print(f"Error: {e}")
+                    logger.error(f"Error: {e}")
             else:
-                print(f"Unknown command: {command_name}")
+                logger.error(f"Unknown command: {command_name}")
 
 if __name__ == '__main__':
     calculator = Calculator()
